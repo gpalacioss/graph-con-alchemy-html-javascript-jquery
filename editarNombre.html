@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Edita Nodo</title>
+
+	 	<script type="text/javascript" src="./0.4.2/scripts/acciones.js"></script>
+  		<script type="text/javascript" src="./0.4.2/scripts/jquery-3.3.1.min.js"></script>
+
+  		<script type="text/javascript">
+
+  			var paramNombre;
+  			var pagina;
+  			var tipo;
+  			var identificador;
+  			var limS;
+
+	function valor() {
+	
+	console.log(location.search.substring(1));
+
+  			var parametros = location.search.substring(1).split("&");
+
+				console.log(parametros);
+
+  			 	
+
+  				vr2  = parametros[1].split("=");
+  			 	param2 = vr2[1].replace("%20", " ");
+  				tipo = param2.replace("%20", " ");
+  				console.log(tipo);
+
+  				vr3  = parametros[2].split("=");
+  			 	param3 = vr3[1].replace("%20", " ");
+  				pagina = param3.replace("%20", " ");
+  				console.log(pagina);
+
+				console.log(parametros[3]);
+  				parmId  = parametros[3].split("=");
+  				identificador = parmId[1];
+  				console.log(identificador);
+
+				if (tipo==="permisoCuentaMonto") {
+
+					var limites = parametros[0].split("--");
+					var li = limites[0].split(":")
+					paramNombre = li[1].replace("%20", "");
+					console.log(paramNombre);
+
+					var ls = limites[1].split(":")
+					limS = ls[1].replace("%20", "");
+					console.log(limS);
+
+					var fieldHTML = '<input type="text" id="ls" name="field_name[]" value=""/>';
+				    var form = $('.edicion');
+				    $(form).append(fieldHTML);
+
+				    document.getElementById("nombre").value = paramNombre;
+				    document.getElementById("ls").value = limS;
+				
+				}else{
+					limS="";
+					vr  = parametros[0].split("=");
+  			 		param = vr[1].replace("%20", " ");
+  					paramNombre = param.replace("%20", " ");
+  					console.log(paramNombre);
+					document.getElementById("nombre").value = paramNombre.replace("%20", " ");
+				}
+
+  		}
+
+  		</script>
+  		
+	<style type="text/css">
+
+		.editar{
+			border: 2px;
+			margin-left: 40%;
+		}
+
+	</style>
+</head>
+<body onload="valor()">
+
+<div class = "editar">
+	<form title="Edita Nodo", class="edicion">
+		<input id="nombre" class ="nombre" type="text" name="nombre"/>
+	</form>
+	<br>
+	<button type="button" onclick="editar(paramNombre, tipo, pagina, identificador, limS);">Aceptar</button>
+	<button type="button" onclick="cancelarEdicion(pagina)">Cancelar</button>
+</div>
+
+
+</body>
+</html>
