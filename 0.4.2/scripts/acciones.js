@@ -46,10 +46,22 @@ function eliminar(nombre, tipo){
     	type: "POST",
     	url: 'http://localhost:8080/eliminaNodo',
     	data: datos,
-    	success: function(){
-    		console.log("todo bien");
-        document.location.href = "./" + pagina;
-    	}
+    	success: function(Response){
+        console.log(Response['code']);
+        if (Response['code'] == 304) {
+          alert(Response['message']);
+          document.location.href = "./" + pagina;
+          
+        }else{
+          alert('Nodo Eliminado Correctamente');
+          document.location.href = "./" + pagina;
+          
+        }
+        
+    	},error:function(xhr, textStatus, errorThrown){
+                  console.log(xhr.status); 
+      }
+
     });
 
 }

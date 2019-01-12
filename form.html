@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<title></title>
+</head>
+<body>
+<div style="margin:10px auto; display:block;" class="card bg-secondary text-white my-5 w-50 mr-md-auto">
+  <div class=" card-header">
+  </div>
+  <div class="card-body">
+    <form>
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-2">Nombre</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="usuario.nombre" name="nombre">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="telefono" class="col-form-label col-sm-2">Telefono</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="usuario.telefono" name="telefono">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="email" class="col-form-label col-sm-2">Email</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="usuario.email" name="email">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="interno" class="col-form-label col-sm-2">Interno</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="usuario.isInterno" name="interno">
+        </div>
+      </div>
+
+      <div class="form-group row">
+          <div class="col-sm-6">
+            <app-combo-box-perfil></app-combo-box-perfil>
+          </div>
+      </div>
+
+      <div class="divBotones">
+        
+        <div class="form-group row">
+          <div class="col-sm-8">
+            <button class="btn btn-success" role="button" (click)="guardaUsuario()">Guardar</button>
+             <a href="empleados.html"><button class="btn btn-danger" role="button">Cancelar</button></a>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

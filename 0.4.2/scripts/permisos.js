@@ -1,6 +1,6 @@
 
   const permiso = async() => {
-        const response = await fetch('http://localhost:8080/usuariosAndPermisosGraph/Rogelio Zarate Mendez');
+        const response = await fetch('http://localhost:8080/usuariosAndPermisosGraph/Zaira Casimiro');
         var dataSource = await response.json();
         console.log(dataSource);
 
