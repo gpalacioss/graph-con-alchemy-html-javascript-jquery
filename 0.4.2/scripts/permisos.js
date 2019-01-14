@@ -1,6 +1,11 @@
-
+var url = 'http://localhost:8080/usuariosAndPermisosGraph/Zaira Casimiro'
+//var url = 'http://localhost:8080/usuariosAndPermisosGraph/Herwin Toral'
   const permiso = async() => {
-        const response = await fetch('http://localhost:8080/usuariosAndPermisosGraph/Zaira Casimiro');
+        const response = await fetch(url);
+        var arregloNombre = url.split('/');
+        var nombreUsuario = arregloNombre[arregloNombre.length-1]
+        console.log(arregloNombre);
+        
         var dataSource = await response.json();
         console.log(dataSource);
 
@@ -72,5 +77,5 @@
 
           var alchemy = new Alchemy(config);
     
-    click();
+    click(nombreUsuario);
     }

@@ -1,5 +1,11 @@
+var url = 'http://localhost:8080/getPermisosCuentaMontoByUsuario/Francisco Armani';
+//var url = 'http://localhost:8080/getPermisosCuentaMontoByUsuario/Rogelio Zarate Mendez';
 const permisoCuenta = async () => {
-        const response = await fetch('http://localhost:8080/getPermisosCuentaMontoByUsuario/Rogelio Zarate Mendez');
+        
+        var arregloNombre = url.split('/');
+        var nombreUsuario = arregloNombre[arregloNombre.length-1]
+        console.log(nombreUsuario);
+        const response = await fetch(url);
         dataSource = await response.json(); //extract JSON from the http response 
       
         console.log(dataSource);
@@ -72,5 +78,5 @@ const permisoCuenta = async () => {
 
          var alchemy = new Alchemy(config)
 
-         click();
+         click(nombreUsuario);
 }

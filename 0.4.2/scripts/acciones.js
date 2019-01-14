@@ -2,8 +2,9 @@ var nombre;
 var tipo;
 var pagina;
 var identificador;
+var nombreUsuario;
 
-function click(){
+function click(usuario){
 
 			var $node = $('g[id^="node-"]');
 			console.log($node);
@@ -32,14 +33,18 @@ function click(){
           console.log("id en el click :: " + identificador);
   			});
 
+        nombreUsuario = usuario;
+        console.log(nombreUsuario)
 		}
 
 
-function eliminar(nombre, tipo){
+function eliminar(nombre, tipo, nombreUsuario, identificador){
 
 	var datos = {
 					"id": nombre, 
-					"tipo": tipo
+					"tipo": tipo,
+          "nombreUsuario":nombreUsuario,
+          "identificador":identificador
 				};
 
     $.ajax({
@@ -111,7 +116,7 @@ console.log(pagina);
 	 $.ajax({
 
     	type: "POST",
-    	url: 'http://localhost:8080/editaNodo',
+    	url: 'http://localhost:v  8080/editaNodo',
     	data: datos,
     	success: function(){
     		document.location.href = "./" + pagina;

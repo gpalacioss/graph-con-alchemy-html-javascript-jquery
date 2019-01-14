@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="./0.4.2/scripts/acciones.js"></script>
+	<script type="text/javascript" src="./0.4.2/scripts/jquery-3.3.1.min.js"></script>
+	<title>
+	</title>
+</head>
+<body>
+	<script type="text/javascript">
+		
+		var info = new Array();
+  		$.ajax({ 
+             type: "GET",
+             dataType: "json",
+             url: "http://localhost:8080/getPerfilesNuevos",
+             success: function(data){ 
+                console.log(data);
+                
+
+                var body = document.getElementsByTagName("body")[0];
+ 
+  // Crea un elemento <table> y un elemento <tbody>
+  var tabla   = document.createElement("table");
+  var tblBody = document.createElement("tbody");
+ 
+  // Crea las celdas
+  console.log(data[1])
+  	for (var i = 0; i < data.length; i++) {
+    // Crea las hileras de la tabla
+    var hilera = document.createElement("tr");
+    hilera.setAttribute("width", "100%")
+
+    
+      // Crea un elemento <td> y un nodo de texto, haz que el nodo de
+      // texto sea el contenido de <td>, ubica el elemento <td> al final
+      // de la hilera de la tabla
+      var celda = document.createElement("td");
+      celda.setAttribute("id", "tblPerfil")
+      var textoCelda = document.createTextNode(data[i].nombre);
+      celda.appendChild(textoCelda);
+      hilera.appendChild(celda);
+
+    // agrega la hilera al final de la tabla (al final del elemento tblbody)
+    tblBody.appendChild(hilera);
+  	}
+ 
+  // posiciona el <tbody> debajo del elemento <table>
+  tabla.appendChild(tblBody);
+  // appends <table> into <body>
+  body.appendChild(tabla);
+  // modifica el atributo "border" de la tabla y lo fija a "2";
+  tabla.setAttribute("border", "2");
+  tabla.setAttribute("width", "70%");
+
+console.log(document.getElementsByTagName('td'));
+
+clickTablaPerfil();
+             }
+         });
+
+
+function clickTablaPerfil(){
+
+	var td = document.getElementsByTagName('td');
+
+	$(td).click(function(){
+		var texto = $(this).text();
+		console.log(texto);
+		getPermisos(texto);
+	})
+
+}
+
+function getPermisos(nombrePerfil){
+var url = "http://localhost:8080/getPermisos/"+nombrePerfil
+	$.ajax({ 
+             type: "GET",
+             dataType: "json",
+             url: url,
+             success: function(data){ 
+                console.log(data);
+
+
+                var body = document.getElementsByTagName("body")[0];
+ 
+  // Crea un elemento <table> y un elemento <tbody>
+  var tabla   = document.createElement("table");
+  var tblBody = document.createElement("tbody");
+ 
+  // Crea las celdas
+  console.log(data[1])
+  	for (var i = 0; i < data.length; i++) {
+    // Crea las hileras de la tabla
+    var hilera = document.createElement("tr");
+    hilera.setAttribute("width", "100%")
+
+    
+      // Crea un elemento <td> y un nodo de texto, haz que el nodo de
+      // texto sea el contenido de <td>, ubica el elemento <td> al final
+      // de la hilera de la tabla
+      var celda = document.createElement("td");
+      celda.setAttribute("id", "tblPerfil")
+      var textoCelda = document.createTextNode(data[i].nombre);
+      celda.appendChild(textoCelda);
+      hilera.appendChild(celda);
+
+    // agrega la hilera al final de la tabla (al final del elemento tblbody)
+    tblBody.appendChild(hilera);
+  	}
+ 
+  // posiciona el <tbody> debajo del elemento <table>
+  tabla.appendChild(tblBody);
+  // appends <table> into <body>
+  body.appendChild(tabla);
+  // modifica el atributo "border" de la tabla y lo fija a "2";
+  tabla.setAttribute("border", "2");
+  tabla.setAttribute("width", "70%");
+
+  
+            }
+         });
+}
+
+	</script>
+</body>
+</html>
