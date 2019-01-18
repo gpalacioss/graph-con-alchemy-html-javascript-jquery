@@ -28,14 +28,16 @@
       			<a class="dropdown-item" href="#">Rol</a>
     		</div>
   		</div>
-		<button type="button" class="btn btn-info" onclick="enviaVariable(nombre, tipo, pagina, identificador)"> Editar</button>
+		<button type="button" class="btn btn-info" onclick="enviaVariable(nombre, tipo, pagina, identificador, limiteInferior, limiteSuperior)"> Editar</button>
 		<button type="button" class="btn btn-info" onclick="eliminar(nombre, tipo, nombreUsuario, identificador)"> Eliminar</button>
+		<a href="./permisosCuentaO.html"><button type="button" class="btn btn-info" > Permisos Cuenta Rogelio</button>
 		<a href="index.html"><button type="button" class="btn btn-info"> Regresar</button></a>
 	</div>
 	
 	
 </head>
 <body onload="permisoCuenta()">
+	<div id="info"></div>
 <div class="alchemy" id="alchemy">
 </body>
 </html>

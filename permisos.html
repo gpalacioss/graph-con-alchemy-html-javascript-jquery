@@ -16,9 +16,10 @@
 
 	<div style="margin:10px auto; display:block;" class="card card-header text-white my-2 w-50 mr-md-auto">
 
-		<a href="./formPerfil.html"><button type="button" class="btn btn-info" onclick="genera_tabla()"> Agregar</button></a>
-		<button type="button" class="btn btn-info" onclick="enviaVariable(nombre, tipo, pagina, identificador)"> Editar</button>
+		<a href="./formPerfil.html"><button type="button" class="btn btn-info" onclick="genera_tabla(nombreUsuario)"> Agregar</button></a>
+		<button type="button" class="btn btn-info" onclick="enviaVariable(nombre, tipo, pagina, identificador, limiteInferior, limiteSuperior)"> Editar</button>
 		<button type="button" class="btn btn-info" onclick="eliminar(nombre, tipo, nombreUsuario, identificador)"> Eliminar</button>
+		<a href="./permisosH.html"><button type="button" class="btn btn-info"> Permisos Herwin</button>
 		<a href="index.html"><button type="button" class="btn btn-info" > Regresar</button></a>
 
 	</div>
@@ -26,6 +27,7 @@
 	
 </head>
 <body onload = "permiso()">
+<div id="info"></div>
 <div class="alchemy" id="alchemy">
 </body>
 </html>

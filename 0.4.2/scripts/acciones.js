@@ -3,6 +3,8 @@ var tipo;
 var pagina;
 var identificador;
 var nombreUsuario;
+var limiteInferior;
+var limiteSuperior;
 
 function click(usuario){
 
@@ -31,11 +33,103 @@ function click(usuario){
 
           identificador = lsId[1];
           console.log("id en el click :: " + identificador);
+
+          getInfoNodeClick(identificador, tipo, nombre);
+
   			});
 
         nombreUsuario = usuario;
         console.log(nombreUsuario)
 		}
+
+
+function getInfoNodeClick(id, tipo, nombre){
+  console.log("en el obtener info" + id + tipo + nombre);
+
+datos = {'id': id, 'tipo': tipo, "nombre": nombre}
+    $.ajax({
+      type: "POST",
+      url: 'http://localhost:8080/getInfoNode',
+      data: datos,
+      success: function(result){
+        console.log(result);
+
+        var infoFinal = armaInfoNode(result, tipo);
+      
+        let lbl = document.getElementById("infoNodo");
+        if (document.body.contains(lbl)) {
+          lbl.remove();
+        }
+
+        var body = document.getElementById("info");
+        var label   = document.createElement("label");
+        label.setAttribute("id", "infoNodo");
+
+        label.style.background="#fff";
+        label.style.color="black";
+
+        //label.css("background-color", "#19635d");
+        //label.css("color", "#fff");
+
+        var textLabel = document.createTextNode(infoFinal);
+        label.appendChild(textLabel);
+
+        body.appendChild(label);
+
+      },error:function(xhr, textStatus, errorThrown){
+                  console.log(xhr.status); 
+      }
+
+    });
+    
+}
+
+
+function armaInfoNode(info, tipo){
+
+  var obj = JSON.parse( info);
+  console.log(obj);
+
+  var date = new Date(obj['fechaCreacion']).toUTCString();
+  date=date.split(' ').slice(0, 4).join(' ');
+  console.log(date); 
+  var datos;
+
+  switch (tipo) {
+  
+    case "usuario":
+       datos = "idUsuario: " + obj['idUsuario'] + ",  nombre: " + obj['nombre'] + ",  telefono: " + obj['telefono'] + ",  email: " + obj['email'];
+      break;
+    case "cuenta":
+        datos = "idCuenta: " + obj['idCuenta'] + ",  Numero de Cuenta: " + obj['numeroCuenta'] + ",  Ultimo Usuario de Modificacion: " + obj['idUsuarioUltimaModificacion'];
+      break;
+    case "compania":
+        datos = "idCompañia: " + obj['idCompania'] + ",  nombre de la Compañia: " + obj['nombreCompania'] + ",  es empresa Padre: " + obj['padre'];
+      break;
+    case "grupo":
+        datos = "idGrupo: " + obj['idGrupo'] + ",  Nombre Grupo:" + obj['nombre'] + ",  Fecha Modificacion: " + obj['fechaModificacion'];
+      break;
+    case "permiso":
+        datos = "idPermiso: " + obj['idPermiso'] + ",  nombre Permiso: " + obj['nombre'] + ",  Descripcion: " + obj['descripcion'] + ",  Fecha De  Modificacion: " + obj['fechaModificacion'];
+      break;
+    case "permisoCuentaMonto":
+      datos = "nombre Permiso: " + nombre + ",  limite Inferior: " + obj['limiteInferior'] + ",  Limite Superior: " + obj['limiteSuperior'];
+      limiteSuperior = obj['limiteSuperior'];
+      limiteInferior = obj['limiteInferior'];
+
+      break;
+    case "rol":
+      
+      datos =  " IdRol: " + obj['idRol'] + ",  Nombre Rol: " + obj['nombreRol'] + ",  Fecha Creacion: " + date ;
+      break;
+      case "perfil":
+      datos =  " idPerfil: " + obj['idPerfil'] + ",  Nombre Perfil: " + obj['nombre'] + ",  Descripcion" + obj['descripcion'] + ",  Fecha Creacion: " + date;
+      break;
+  }
+
+  return datos;
+
+}
 
 
 function eliminar(nombre, tipo, nombreUsuario, identificador){
@@ -71,13 +165,13 @@ function eliminar(nombre, tipo, nombreUsuario, identificador){
 
 }
 
-function enviaVariable(nombre, tipo, pagina, identificador){
+function enviaVariable(nombre, tipo, pagina, identificador, limI, limS){
 
 	console.log("el nombre enviado :: " + nombre);
 
   if (tipo==="permisoCuentaMonto") {
 
-    var pagina = document.location.href = "./editarNombre.html?nombre=" + nombre + "&tipo=" + tipo + "&pg=" + pagina + "&id=" + identificador + "&";
+    var pagina = document.location.href = "./editarNombre.html?nombre=" + nombre + "&tipo=" + tipo + "&pg=" + pagina + "&id=" + identificador + "&lm=" + limI + "&ls=" + limS + "&";
 
   }else{
 
@@ -86,12 +180,14 @@ function enviaVariable(nombre, tipo, pagina, identificador){
   }
 }
 
-function editar(nombre, tipo, pagina, identificador, lims){
+function editar(nombre, tipo, pagina, identificador, limI, lims){
 
-var lsupNuevo = "0";
+var lInfNuevo = "0";
+var lSupNuevo = "0";
 
 if (tipo==="permisoCuentaMonto") {
-  lsupNuevo = document.getElementById("ls").value;
+  lInfNuevo = document.getElementById("li").value;
+  lSupNuevo = document.getElementById("ls").value;
 }
 
 var nuevoNombre = document.getElementById("nombre").value;
@@ -100,7 +196,7 @@ var nuevoNombre = document.getElementById("nombre").value;
 console.log(nombre);
 console.log(nuevoNombre);
 console.log(lims)
-console.log(lsupNuevo);
+console.log(lSupNuevo);
 console.log(tipo);
 console.log(pagina);
 
@@ -109,14 +205,15 @@ console.log(pagina);
 		"nombreNuevo": nuevoNombre,
 		"tipo": tipo,
     "id": identificador,
-    "limiteSupNuevo": lsupNuevo
+    "limiteInfNuevo": lInfNuevo,
+    "limiteSupNuevo": lSupNuevo
 	}
 
 
 	 $.ajax({
 
     	type: "POST",
-    	url: 'http://localhost:v  8080/editaNodo',
+    	url: 'http://localhost:8080/editaNodo',
     	data: datos,
     	success: function(){
     		document.location.href = "./" + pagina;

@@ -1,5 +1,10 @@
+var url = 'http://localhost:8080/getPermisosCuentaMontoAndSimplesByUsuario/Rogelio Zarate Mendez'
 const permisoCuentaAndSimple = async () => {
-        const response = await fetch("http://localhost:8080/getPermisosCuentaMontoAndSimplesByUsuario/Rogelio Zarate Mendez");
+        var arregloNombre = url.split('/');
+        var nombreUsuario = arregloNombre[arregloNombre.length-1]
+        console.log(arregloNombre);
+
+        const response = await fetch(url);
         dataSource = await response.json(); //extract JSON from the http response 
       
         console.log(dataSource);
@@ -67,10 +72,9 @@ const permisoCuentaAndSimple = async () => {
                 "color": "#f7a204"
               }
             },
-            //dataSource: 'http://127.0.0.1:8887/usuarioAndPermisosGraph.json'
             };
 
          var alchemy = new Alchemy(config)
 
-         click();
+         click(nombreUsuario);
 }

@@ -9,6 +9,7 @@
 <body>
 	<script type="text/javascript">
 		
+    console.log(nombreUsuario)
 		var info = new Array();
   		$.ajax({ 
              type: "GET",
@@ -100,7 +101,7 @@ var url = "http://localhost:8080/getPermisos/"+nombrePerfil
       // texto sea el contenido de <td>, ubica el elemento <td> al final
       // de la hilera de la tabla
       var celda = document.createElement("td");
-      celda.setAttribute("id", "tblPerfil")
+      celda.setAttribute("id", "tblPermiso")
       var textoCelda = document.createTextNode(data[i].nombre);
       celda.appendChild(textoCelda);
       hilera.appendChild(celda);
@@ -117,11 +118,47 @@ var url = "http://localhost:8080/getPermisos/"+nombrePerfil
   tabla.setAttribute("border", "2");
   tabla.setAttribute("width", "70%");
 
-  
+  clickPermiso(nombrePerfil)
             }
          });
 }
 
+  function clickPermiso(nombrePerfil){
+
+    var td = document.getElementsByTagName('td');
+
+    var url = 'http://localhost:8080/agregarPermisoUsuario'
+
+    
+  
+    $(td).click(function(){
+        var texto = $(this).text();
+        console.log(texto);
+          getPermisos(texto);
+
+          var datos = {
+          "nombreUsuario": 'Herwin Toral',
+          "nombrePerfil": texto
+          }
+
+        $.ajax({
+             type: "POST",
+             dataType: "json",
+             url: url,
+             data: datos,
+             success: function(data){ 
+                document.location.href = "./permisos.html"; 
+              }
+            });
+  
+      });
+  }
+
+
+
 	</script>
+
+<a href="permisos.html"><button type="button" class="btn btn-info" > Regresar</button></a>
+
 </body>
 </html>

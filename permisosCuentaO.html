@@ -9,11 +9,12 @@
   	<script src="./0.4.2/scripts/vendor.js"></script>
   	<script src="./0.4.2/scripts/alchemy.js"></script>
   	  	<script type="text/javascript" src="./0.4.2/scripts/acciones.js"></script>
-  	<script type="text/javascript" src="./0.4.2/scripts/permisoCuentaAndSimple.js"></script>
+  	<script type="text/javascript" src="./0.4.2/scripts/permisoCuenta.js"></script>
 
 	<title>Permisos</title>
 
 	<div style="margin:10px auto; display:block;" class="card card-header text-white my-2 w-50 mr-md-auto">
+	
 		<div class="btn-group" role="group">
     		<button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       			Guardar
@@ -27,15 +28,15 @@
       			<a class="dropdown-item" href="#">Rol</a>
     		</div>
   		</div>
-		<button type="button" class="btn btn-info" onclick="enviaVariable(nombre, tipo, pagina, identificador, limiteInferior, limiteSuperior)"> Editar</button>
+		<button type="button" class="btn btn-info" onclick="enviaVariable(nombre, tipo, pagina, identificador)"> Editar</button>
 		<button type="button" class="btn btn-info" onclick="eliminar(nombre, tipo, nombreUsuario, identificador)"> Eliminar</button>
-		<a href="index.html"><button type="button" class="btn btn-info" > Regresar</button></a>
+		<a href="index.html"><button type="button" class="btn btn-info"> Regresar</button></a>
 	</div>
-
+	
 	
 </head>
-<body onload="permisoCuentaAndSimple()">
-	<div id="info"></div>
+<body onload="permisoCuentar()">
+  <div id="info"></div>
 <div class="alchemy" id="alchemy">
 </body>
 </html>
